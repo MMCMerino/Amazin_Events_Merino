@@ -18,18 +18,17 @@ main{
     width:auto;
 } 
 
-.container{
-    display: flex;
-    justify-content: center;
-}
+
 
 .container1{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center ;
 }
 
 .container2{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;  
 
 }
