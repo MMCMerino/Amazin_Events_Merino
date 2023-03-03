@@ -3,6 +3,9 @@
     margin:0;
     box-sizing: border-box;
 }
+ 
+
+
 
 h2{
     height: 15vh;
@@ -14,8 +17,10 @@ h2{
 }
 
 main{
-   /* height:80vh;*/
+    min-height: 66vh ;
+    
     width:auto;
+   
 } 
 
 
@@ -23,7 +28,8 @@ main{
 .container1{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center ;
+    justify-content:left ;
+    margin-bottom: 10px;
 }
 
 .container2{
@@ -32,22 +38,28 @@ main{
     justify-content: center;  
 
 }
-
-
-/*.formulario{
-
-    width: 1000px;
-    padding-left: 400px;
+.card{
+    margin: 5px;
 }
-*/
+
+.card-img-top{
+    width: 18rem;
+    height: 12rem;
+}
+
 
 
 footer{
-    margin-top: 50px;
-    
+    margin-top:50px;       
 }
 
 /* pagina stats*/
+
+.container{        /*tambien esta en contact*/
+    
+    margin-top: 50px; 
+    
+}
 
 table th{
     border: 1px solid rgb(27, 27, 27);
