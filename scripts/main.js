@@ -13,7 +13,8 @@ for (let i = 0; i < data.events.length; i++){
                       <div class="card-body">
                       <h5 class="card-title">${data.events[i].name}</h5>
                       <p class="card-text">${data.events[i].description}</p>
-                      <p class="card-text ">Price ${data.events[i].price}</p>
+                      <p class="card-text">Fecha: ${data.events[i].date}</p>
+                      <p class="card-text ">Price: ${data.events[i].price}</p>
                       <a href="./details.html" class="btn btn-danger">Details</a>
                       </div>
   
