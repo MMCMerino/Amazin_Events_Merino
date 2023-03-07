@@ -7,7 +7,8 @@ let eventos ='';
 
 for (let i = 0; i < data.events.length; i++){
 
-  eventos += ` <div class="container2 ">
+   if(data.events[i].date < data.currentDate){
+        eventos += ` <div class="container2 ">
                     <div class="card " style="width: 18rem;">
                       <img src= ${data.events[i].image} class="card-img-top " alt="Imagen Evento">
                       <div class="card-body">
@@ -19,7 +20,8 @@ for (let i = 0; i < data.events.length; i++){
   
                     </div>
                  </div>`
-}
+                }
+            }
 
 console.log(eventos);
 divTarjetas.innerHTML = eventos;
