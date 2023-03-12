@@ -19,6 +19,33 @@ const eventos = data.events.reduce((acumulador, valorActual) => {
                       </div>`
                 },"");
 
-console.log(eventos);
+/*console.log(eventos);*/
 divTarjetas.innerHTML = eventos;              
 
+//checksbox de manera dinamica
+
+const divCheckbox = document.getElementById("checkbox");
+
+const chequeador = data.events.reduce((acumulador, valorActual, index) => {      //Armado de checkbox
+   if (valorActual._id % 2==0){ // Se repiten de a dos, lo filtro para que no aparezcan dos veces
+  return acumulador + `<div class="container1">
+                          <div class="form-check form-check-inline ms-4  " >
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox${index}" value="option${index}">
+                          <label class="form-check-label" for="inlineCheckbox${index}">${valorActual.category}</label>
+                          </div>
+                       </div>`
+   }else{
+    return acumulador;}
+
+  
+},"");
+
+console.log(chequeador);
+divCheckbox.innerHTML = chequeador;
+
+//Intento task3 entrada de busqueda
+/*
+const formulario = document.forms[0];
+console.log(formulario);
+const boton = document.getElementById('boton');
+console.log(boton);*/

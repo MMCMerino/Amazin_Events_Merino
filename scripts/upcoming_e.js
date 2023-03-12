@@ -25,7 +25,28 @@ const eventos = upcomingEvents.reduce((acumulador, valorActual) => {
 
 
 console.log(eventos);
-divTarjetas.innerHTML = eventos;             
+divTarjetas.innerHTML = eventos;   
+
+//checksbox de manera dinamica
+
+const divCheckbox = document.getElementById("checkbox");
+
+const chequeador = data.events.reduce((acumulador, valorActual, index) => {      //Armado de checkbox
+   if (index % 2==0){ // Se repiten de a dos, lo filtro para que no aparezcan dos veces
+  return acumulador + `<div class="container1">
+                          <div class="form-check form-check-inline ms-4  " >
+                          <input class="form-check-input" type="checkbox" id="inlineCheckbox${index}" value="option${index}">
+                          <label class="form-check-label" for="inlineCheckbox${index}">${valorActual.category}</label>
+                          </div>
+                       </div>`
+   }else{
+    return acumulador;}
+
+  
+},"");
+
+console.log(chequeador);
+divCheckbox.innerHTML = chequeador;
 
 
 
