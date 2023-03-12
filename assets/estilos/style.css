@@ -38,7 +38,7 @@ main{
     display: flex;
     flex-wrap: wrap;
     justify-content:center ;
-    /*margin-bottom: 10px;*/
+    margin-top: 40px;
 }
 
 
