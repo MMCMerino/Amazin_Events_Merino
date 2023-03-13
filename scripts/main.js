@@ -40,12 +40,49 @@ const chequeador = data.events.reduce((acumulador, valorActual, index) => {     
   
 },"");
 
-console.log(chequeador);
+//console.log(chequeador);
 divCheckbox.innerHTML = chequeador;
 
 //Intento task3 entrada de busqueda
-/*
+
 const formulario = document.forms[0];
-console.log(formulario);
 const boton = document.getElementById('boton');
-console.log(boton);*/
+const entrada = document.getElementById('entrada');
+
+let valorIngresado= "";
+let tarjetasBuscadas="";
+
+formulario.addEventListener('submit', (evento)=>{
+  evento.preventDefault();
+  let tarjetasBuscadas="";
+  valorIngresado = (entrada.value);
+  
+  console.log(valorIngresado.toLowerCase());
+  
+  for(let i=0; i<data.events.length; i++){
+    if((data.events[i].category.toLowerCase()== valorIngresado.toLowerCase()) ||( data.events[i].name.toLowerCase() == valorIngresado.toLowerCase())){
+      tarjetasBuscadas += `<div class="container2 ">
+      <div class="card " style="width: 18rem;">
+       <img src= ${data.events[i].image} class="card-img-top " alt="Imagen Evento: ${data.events[i].name}">
+          <div class="card-body">
+           <h5 class="card-title">${data.events[i].name}</h5>
+            <p class="card-text">${data.events[i].description}</p>
+           <p class="card-text">Fecha: ${data.events[i].date}</p>
+             <p class="card-text ">Price: ${data.events[i].price}</p>
+             <a href="./details.html" class="btn btn-danger">Details</a>
+          </div>
+
+      </div>
+     </div>`
+    }
+
+  }
+  console.log(tarjetasBuscadas);
+  divTarjetas.innerHTML = tarjetasBuscadas;
+  
+});
+
+
+
+
+
