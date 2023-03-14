@@ -15,7 +15,7 @@ const eventos = pastEvents.reduce((acumulador, valorActual) => {
                              <p class="card-text">${valorActual.description}</p>
                             <p class="card-text">Fecha: ${valorActual.date}</p>
                               <p class="card-text ">Price: ${valorActual.price}</p>
-                              <a href="./details.html" class="btn btn-danger">Details</a>
+                              <a href="./details.html?id=${valorActual._id}" class="btn btn-danger">Details</a>
                            </div>
 
                        </div>
