@@ -15,7 +15,7 @@ tarjetaDeDatos.innerHTML =`<div class="tarjeta">
 <div class="card" style="max-width: 700px;">
   <div class="row g-0">
     <div class="col-md-6">
-      <img src= ${tarjetaFinal.image} class="img-fluid rounded-start "  alt="${tarjetaFinal.category}">
+      <img src= ${tarjetaFinal.image} class="img-fluid rounded-start " style="width: 100% ; height:100%;" alt="${tarjetaFinal.category}">
     </div>
     <div class="col-md-6">
       <div class="card-body">
