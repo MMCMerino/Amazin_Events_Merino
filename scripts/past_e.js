@@ -1,15 +1,49 @@
 //Carga de tarjetas del Home
 
 const divTarjetas = document.getElementById("tarjetas");
+const divCheckbox = document.getElementById("checkbox");
+const entrada = document.getElementById('entrada');
+
+async function traerDatos(){
+   try{
+     const response = await fetch('https://mindhub-xj03.onrender.com/api/amazing');
+     console.log(response);
+     const datos = await response.json();
+     console.log(datos.events);
+     console.log(datos);
+     let eventosQuePasaron = cargaDeTarjetasPast(datos.events, datos.currentDate);
+     console.log("eventos que pasaron",eventosQuePasaron);
+     cargaDeCheckboxs(datos.events);
+ 
+     function superFiltro(){
+       let primerFiltro = filtrarPorTexto(eventosQuePasaron,entrada.value);
+       let segundoFiltro = filtrarPorCategoria(primerFiltro);
+       pintarTarjetas(segundoFiltro);
+    }
+    
+     entrada.addEventListener('input',superFiltro);
+     divCheckbox.addEventListener('change',superFiltro);
+ 
+   }
+ 
+   catch(error){
+     console.log(error);
+   }
+ }
+ traerDatos();
 
 
-const pastEvents = data.events.filter( evento => evento.date < data.currentDate);
-console.log (pastEvents);
+//Carga de tarjetas
+
+
+function cargaDeTarjetasPast(array1 ,array2){
+const pastEvents = array1.filter( evento => evento.date < array2);
+//console.log (pastEvents);
 
 const eventos = pastEvents.reduce((acumulador, valorActual) => {
   return acumulador + `<div class="container2 ">
                        <div class="card " style="width: 18rem;">
-                        <img src= ${valorActual.image} class="card-img-top " alt="Imagen Evento: ${valorActual.name}">
+                        <img src= "${valorActual.image}" class="card-img-top " alt="Imagen Evento: ${valorActual.name}">
                            <div class="card-body">
                             <h5 class="card-title">${valorActual.name}</h5>
                              <p class="card-text">${valorActual.description}</p>
@@ -24,53 +58,40 @@ const eventos = pastEvents.reduce((acumulador, valorActual) => {
 
 
 
-console.log(eventos);
-divTarjetas.innerHTML = eventos;             
+//console.log(eventos);
+divTarjetas.innerHTML = eventos;  
+ return pastEvents;
+               }
 
-//checksbox de manera dinamica
 
-const divCheckbox = document.getElementById("checkbox");
 
-const chequeador = data.events.reduce((acumulador, valorActual, index) => {      //Armado de checkbox
-   if (index % 2==0){ // Se repiten de a dos, lo filtro para que no aparezcan dos veces
-  return acumulador + `<div class="container1">
-                          <div class="form-check form-check-inline ms-4  " >
-                          <input class="form-check-input" type="checkbox" id="${valorActual.category}" value="${valorActual.category}">
-                          <label class="form-check-label" for="${valorActual.category}">${valorActual.category}</label>
-                          </div>
-                       </div>`
-   }else{
-    return acumulador;}
+// funcion checksbox de manera dinamica
 
+function cargaDeCheckboxs(array){
   
-},"");
-
-console.log(chequeador);
-divCheckbox.innerHTML = chequeador;
-
-
-//Filtrado del search
-
-const formulario = document.forms[0];
-const boton = document.getElementById('boton');
-const entrada = document.getElementById('entrada');
-
-
-
-
-entrada.addEventListener('input',superFiltro);
-
-//Filtrado por checkeo
-
-divCheckbox.addEventListener('change',superFiltro);
+   let arrayCategorias = array.map(tarjeta => tarjeta.category)
+   console.log(arrayCategorias) 
+   let setCategorias= new Set(arrayCategorias)
+   console.log(setCategorias) 
+   let arrayChecks = Array.from(setCategorias)
+   /* console.log(arrayCategorias) */
+   let checkboxes = ''
+   arrayChecks.forEach(category => {
+       checkboxes +=  `<div  class="container1">
+       <div class="form-check form-check-inline ms-4  " >
+       <input class="form-check-input" type="checkbox" id="${category}" value="${category}">
+       <label class="form-check-label" for="${category}">${category}</label>
+       </div>
+    </div>`
+      
+   })
+   divCheckbox.innerHTML = checkboxes;
+}
 
 
 
 
-
-
-
-//Funciones
+//Funciones de filtrado
 function filtrarPorTexto(array,texto){
    let arrayFiltrado = array.filter(elemento => elemento.name.toLowerCase().includes(texto.toLowerCase()));
     console.log("array filtrado por texto",arrayFiltrado);
@@ -118,9 +139,3 @@ function pintarTarjetas(array){
    });
    divTarjetas.innerHTML = tarjetas;
 };
-
-function superFiltro(){
-   let primerFiltro = filtrarPorTexto(pastEvents,entrada.value);
-   let segundoFiltro = filtrarPorCategoria(primerFiltro);
-   pintarTarjetas(segundoFiltro);
-}
