@@ -51,10 +51,11 @@ function cargaDeTarjetas(array){
 /*console.log(eventos);*/
 divTarjetas.innerHTML=eventos;              
 }
+
+
+
+
 //checksbox de manera dinamica
-
-
-
 
 function cargaDeCheckboxs(array){
   
@@ -80,28 +81,8 @@ function cargaDeCheckboxs(array){
 
 
 
-/*Filtrados*/
+//Funciones para el filtrado
 
-//Filtrado del search
-
-
-
-
-
-
-//entrada.addEventListener('input',superFiltro);
-
-//Filtrado por checkeo
-
-//divCheckbox.addEventListener('change',superFiltro);
-
-
-
-
-
-
-
-//Funciones
 function filtrarPorTexto(array,texto){
    let arrayFiltrado = array.filter(elemento => elemento.name.toLowerCase().includes(texto.toLowerCase()));
    // console.log("array filtrado por texto",arrayFiltrado);
