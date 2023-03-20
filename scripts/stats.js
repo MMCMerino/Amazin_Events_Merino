@@ -3,6 +3,8 @@
     console.log(tdMayorAsistencia);
     const tdMenorAsistencia = document.getElementById("menorAsistencia");
     console.log(tdMenorAsistencia);
+    const tdMayorCapacidad = document.getElementById("mayorCapacidad");
+    console.log(tdMayorCapacidad);
 
 async function traerDatos(){
    try{
@@ -16,7 +18,8 @@ async function traerDatos(){
     // console.log(" arreglo de mayor porcentaje de asistencia",porcentajeDeAsistenciaMayor);
      let porcentajeDeAsistenciaMenor = menorPorcentajeDeAsistencia(eventosQuePasaron);
      //console.log("arreglo de menor porcentaje de asistencia",porcentajeDeAsistenciaMenor);
-     
+     let mayorCapacidadEvento = eventoConMayorCapacidad(datos.events);
+     console.log("evento de mayor capacidad",mayorCapacidadEvento);
      }
 
    catch(error){
@@ -87,3 +90,24 @@ function menorPorcentajeDeAsistencia(array){
     return arregloMenorPorcentaje;
 }
     
+function eventoConMayorCapacidad(array){
+    let capacidad = 0;
+    let id = 0;
+    for(let i=0; i<array.length; i++){
+        if(capacidad < array[i].capacity){
+        capacidad = array[i].capacity;
+        id = i+1;
+        
+    }
+    }
+    let arregloConMayorCapacidad=[];
+    for(let i=0; i<array.length; i++){
+        if(id==array[i]._id){
+            arregloConMayorCapacidad.push(array[i]);
+
+        }
+    }
+    tdMayorCapacidad.innerHTML=`<td>${arregloConMayorCapacidad[0].name}  ${capacidad}</td >`;
+    return arregloConMayorCapacidad;
+
+}
