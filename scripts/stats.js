@@ -9,8 +9,7 @@
     //console.log(tbodyTablaDeEventosFuturos);
     const tbodyTablaDeEventosPasados = document.getElementById("tablaEventosPasados");
     //console.log(tbodyTablaDeEventosPasados);
-    const tdEventosPasados = document.getElementById("eventosPasados");
-    const tdGananciasPasadas = document.getElementById("gananciasPasadas");
+    
 
 async function traerDatos(){
    try{
@@ -35,13 +34,14 @@ async function traerDatos(){
      let gananciasEventosPasados = gananciasPorCategoria(eventosQuePasaron,categoriasDeEventosPasados,tbodyTablaDeEventosPasados);
      console.log("ganancias",gananciasEventosPasados);
      let gananciasEventosFuturos =gananciasPorCategoriasFuturo(eventosDelFuturo,categoriasDeEventosFuturos,tbodyTablaDeEventosFuturos);
-     let asistenciaPasada =porcentajeDeAsistencia(eventosQuePasaron);
+     let asistenciaPasada =porcentajeDeAsistenciaPasada(eventosQuePasaron);
      console.log("Asistencia",asistenciaPasada);
+     let asistenciaFutura=porcentajeDeAsistenciaFutura(eventosDelFuturo);
 
-     let datosTablaPasados=[categoriasDeEventosPasados,gananciasEventosPasados];
+     let datosTablaPasados=[categoriasDeEventosPasados,gananciasEventosPasados,asistenciaPasada];
      //console.log("datosTablaPasados",datosTablaPasados);
-     let datosTablaFuturo=[categoriasDeEventosFuturos,gananciasEventosFuturos];
-     console.log("datosTablaFuturos",datosTablaFuturo);
+     let datosTablaFuturo=[categoriasDeEventosFuturos,gananciasEventosFuturos,asistenciaFutura];
+     //console.log("datosTablaFuturos",datosTablaFuturo);
 
      pintarDatos(datosTablaPasados,tbodyTablaDeEventosPasados);
      pintarDatos(datosTablaFuturo,tbodyTablaDeEventosFuturos);
@@ -185,32 +185,55 @@ function gananciasPorCategoria(array, arrayCategoria,tbody){
 
     return gananciaPorCateg;
 }
+//Funcion a trabajar 
+function porcentajeDeAsistenciaPasada(array){
+    let asistenciaEnPorciento= [];
 
-function porcentajeDeAsistencia(array){
-    const asistenciaEnPorciento = array.map( elemento => {
-        let porcentaje = (elemento.assistance/elemento.capacity)*100 ;
-        return porcentaje; 
+        array.forEach(categorias => {
+        const eventosEnCategoria = array.filter(evento => evento.category === categorias.category);
+        const asistenciaEnPorcentaje = eventosEnCategoria.reduce((total,evento)=> total + evento.assistance/evento.capacity,0)/eventosEnCategoria.length*100;
+        asistenciaEnPorciento.push(asistenciaEnPorcentaje);
+        
+        
     });
-
+    //console.log(asistenciaEnPorciento);
     return asistenciaEnPorciento;
+        
+}
+
+function porcentajeDeAsistenciaFutura(array){
+    let asistenciaEnPorcientoFutura= [];
+
+        array.forEach(categorias => {
+        const eventosEnCategoria = array.filter(evento => evento.category === categorias.category);
+        const asistenciaEnPorcentaje = eventosEnCategoria.reduce((total,evento)=> total + evento.estimate/evento.capacity,0)/eventosEnCategoria.length*100;
+        asistenciaEnPorcientoFutura.push(asistenciaEnPorcentaje);
+        
+        
+    });
+    //console.log(asistenciaEnPorciento);
+    return asistenciaEnPorcientoFutura;
+        
 }
 
 
 
+//cuando tenga lista la funcion de porcentaje de asistencia se la agrego al arreglo y el arraydoble pasa a ser triple y uso arraydoble[2][i][i]
 
-function pintarDatos(arraydoble,tbody){
-    let ganancYCategoria = '';
+function pintarDatos(arraytriple,tbody){
+    let ganancCategoriaAsistencia = '';
     let categor = '';
-    for(let i=0 ; i<arraydoble[0].length ; i++){
-         ganancYCategoria +=  `<tr >
-         <td>${arraydoble[0][i]}</td>
-         <td>$${arraydoble[1][i]}</td>
+    for(let i=0 ; i<arraytriple[0].length ; i++){
+         ganancCategoriaAsistencia +=  `<tr >
+         <td>${arraytriple[0][i]}</td>
+         <td>$${arraytriple[1][i]}</td>
+         <td>${arraytriple[2][i]}%</td>
          
        </tr>`
     }
     
     
-    tbody.innerHTML= ganancYCategoria; 
+    tbody.innerHTML= ganancCategoriaAsistencia; 
     }
 
 
