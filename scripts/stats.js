@@ -84,7 +84,7 @@ function mayorPorcentajeDeAsistencia(array){
 
     }
 
-    tdMayorAsistencia.innerHTML= `<td>${arregloMayorPorcentaje[0].name}  ${mayorPorcentaje}%</td >`;
+    tdMayorAsistencia.innerHTML= `<td>${arregloMayorPorcentaje[0].name}  ${mayorPorcentaje.toFixed(2)}%</td >`;
     return arregloMayorPorcentaje;
 }
 
@@ -111,7 +111,7 @@ function menorPorcentajeDeAsistencia(array){
 
     }
 
-    tdMenorAsistencia.innerHTML= `<td>${arregloMenorPorcentaje[0].name}  ${menorPorcentaje}%</td >`;
+    tdMenorAsistencia.innerHTML= `<td>${arregloMenorPorcentaje[0].name}  ${menorPorcentaje.toFixed(2)}%</td >`;
     return arregloMenorPorcentaje;
 }
     
@@ -218,7 +218,7 @@ function porcentajeDeAsistenciaFutura(array){
 
 
 
-//cuando tenga lista la funcion de porcentaje de asistencia se la agrego al arreglo y el arraydoble pasa a ser triple y uso arraydoble[2][i][i]
+//cuando tenga lista la funcion de porcentaje de asistencia se la agrego al arreglo y el arraydoble pasa a ser triple y uso arraydoble[2][i]
 
 function pintarDatos(arraytriple,tbody){
     let ganancCategoriaAsistencia = '';
@@ -227,7 +227,7 @@ function pintarDatos(arraytriple,tbody){
          ganancCategoriaAsistencia +=  `<tr >
          <td>${arraytriple[0][i]}</td>
          <td>$${arraytriple[1][i]}</td>
-         <td>${arraytriple[2][i]}%</td>
+         <td>${arraytriple[2][i].toFixed(2)}%</td>
          
        </tr>`
     }
